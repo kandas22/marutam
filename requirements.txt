@@ -1,0 +1,22 @@
+# Flask Backend
+flask>=3.0.0
+flask-cors>=4.0.0
+flask-jwt-extended>=4.6.0
+
+# Database
+supabase>=2.0.0
+psycopg2-binary>=2.9.0
+python-dotenv>=1.0.0
+
+# Security
+bcrypt>=4.1.0
+
+# Streamlit Frontend
+streamlit>=1.29.0
+streamlit-option-menu>=0.3.6
+plotly>=5.18.0
+pandas>=2.0.0
+
+# Utilities
+requests>=2.31.0
+python-dateutil>=2.8.0
