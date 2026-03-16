@@ -16,13 +16,21 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy API source code
 COPY api/ ./api/
-COPY .env ./
+
+# NOTE: .env is NOT baked into the image; supply secrets via docker-compose
+#       env_file / --env-file / environment variables at runtime.
 
 # Set Python path so Flask can resolve 'routes.*' imports
 ENV PYTHONPATH=/app/api
 
-# Expose Flask port
+# Run as a non-root user for security
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+USER appuser
+
+# Expose Gunicorn port
 EXPOSE 5001
 
-# Run Flask API
-CMD ["python", "api/app.py"]
+# Production: run with Gunicorn
+# - app:create_app() uses the application factory pattern
+# - Config is loaded from gunicorn.conf.py
+CMD ["gunicorn", "--config", "api/gunicorn.conf.py", "api.app:create_app()"]
