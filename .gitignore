@@ -49,6 +49,5 @@ logs/
 
 # Streamlit
 .streamlit/secrets.toml
-.env.example
 # Docker
 .docker/
